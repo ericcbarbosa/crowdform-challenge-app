@@ -1,0 +1,58 @@
+export default [{
+  id: 1,
+  name: 'Wind Fund',
+  value: 1032.23,
+  year: 2022,
+  icon: 'wind',
+  chartUrl: '',
+  info: {
+    percentStatus: 3.57,
+    aum: 3.57,
+    ter: 3.57,
+    priceAtClose: 17.68,
+    priceAtOpen: 17.74,
+    issueDate: '',
+    vintageRange: {
+      from: 2019,
+      to: 2022,
+    },
+  },
+}, {
+  id: 2,
+  name: 'Solar Fund',
+  value: 986.61,
+  year: 2021,
+  icon: 'sun',
+  chartUrl: '',
+  info: {
+    percentStatus: -0.13,
+    aum: 3.57,
+    ter: 3.57,
+    priceAtClose: 17.68,
+    priceAtOpen: 17.74,
+    issueDate: '',
+    vintageRange: {
+      from: 2019,
+      to: 2022,
+    },
+  },
+}, {
+  id: 3,
+  name: 'Nature Fund',
+  value: 1122.23,
+  year: 2023,
+  icon: 'nature',
+  chartUrl: '',
+  info: {
+    percentStatus: 0,
+    aum: 3.57,
+    ter: 3.57,
+    priceAtClose: 17.68,
+    priceAtOpen: 17.74,
+    issueDate: '',
+    vintageRange: {
+      from: 2019,
+      to: 2022,
+    },
+  },
+}]
