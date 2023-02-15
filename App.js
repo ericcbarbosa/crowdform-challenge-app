@@ -28,7 +28,7 @@ function AppContainer() {
       ) : (
         <Stack.Navigator>
           <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
-          <Stack.Screen name="Register" component={RegisterScreen} options={{ headerShown: false }} />
+          <Stack.Screen name="Register" component={RegisterScreen} options={{ title: '' }} />
         </Stack.Navigator>
       )}
     </NavigationContainer>

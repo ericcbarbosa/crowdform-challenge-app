@@ -5,8 +5,7 @@ import { useForm } from 'react-hook-form';
 import InputEmail from '../../components/form/InputEmail';
 import InputPassword from '../../components/form/InputPassword';
 
-
-export default function LoginScreen() {
+export default function LoginScreen({ navigation }) {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
 
@@ -23,15 +22,17 @@ export default function LoginScreen() {
     }
   };
 
+  const onRegisterPress = () => {
+    navigation.navigate('Register');
+  };
+
   const onLoginSubmit = (data) => {
     console.log('data: ', data)
   }
 
-  const onSubmit = data => console.log(data);
-
   return (
     <View style={{ padding: 21, backgroundColor: 'white', flex: 1 }}>
-      <Text style={{textAlign: 'center', fontWeight: 'bold', fontSize: 24, marginBottom: 21 }}>Login!</Text>
+      <Text style={{textAlign: 'center', fontWeight: 'bold', fontSize: 24, marginBottom: 21 }}>Login</Text>
 
       <View style={styles.fieldController}>
         <InputEmail
@@ -52,6 +53,16 @@ export default function LoginScreen() {
       </View>
 
       <Button title="Login" onPress={handleSubmit(onLoginSubmit)} />
+
+      <View style={styles.signupContainer}>
+        <Text style={styles.signup}>
+          Don't have an account?{' '}
+        </Text>
+
+        <Text style={styles.signupLink} onPress={onRegisterPress}>
+          Signup here
+        </Text>
+      </View>
     </View>
   );
 }
@@ -60,21 +71,19 @@ const styles = StyleSheet.create({
   fieldController: {
     marginBottom: 12
   },
-  fieldLabel: {
-    fontWeight: 'bold',
-    fontSize: 16,
-    color: '#666',
-    marginBottom: 7,
+  signupContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    marginTop: 15,
+    textAlign: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-  fieldInput: {
-    backgroundColor: '#eee',
-    paddingHorizontal: 12,
-    paddingVertical: 9,
-    borderRadius: 5,
-    fontWeight: '600',
+  signup: {
+    fontSize: 14,
   },
-  fieldError: {
-    color: '#f00',
-    marginVertical: 5,
+  signupLink: {
+    fontSize: 14,
+    textDecorationLine: 'underline',
   },
 });
