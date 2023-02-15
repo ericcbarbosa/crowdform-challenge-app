@@ -1,14 +1,31 @@
-import { Button, StyleSheet, Text, TextInput, View } from "react-native";
-import { useForm, Controller } from "react-hook-form";
+import { useRef } from 'react';
+import { Button, StyleSheet, Text, View } from 'react-native';
+import { useForm } from 'react-hook-form';
+
+import InputEmail from '../../components/form/InputEmail';
+import InputPassword from '../../components/form/InputPassword';
 
 
 export default function LoginScreen() {
+  const emailRef = useRef(null);
+  const passwordRef = useRef(null);
+
   const { control, handleSubmit, formState: { errors } } = useForm({
     defaultValues: {
       email: '',
-      password: ''
+      password: '',
     }
   });
+
+  const focusNextField = (field) => {
+    if (field.current) {
+      field.current.focus();
+    }
+  };
+
+  const onLoginSubmit = (data) => {
+    console.log('data: ', data)
+  }
 
   const onSubmit = data => console.log(data);
 
@@ -17,43 +34,24 @@ export default function LoginScreen() {
       <Text style={{textAlign: 'center', fontWeight: 'bold', fontSize: 24, marginBottom: 21 }}>Login!</Text>
 
       <View style={styles.fieldController}>
-        <Text style={styles.fieldLabel}>E-mail</Text>
-
-        <Controller
-          name="email"
+        <InputEmail
+          ref={emailRef}
           control={control}
-          rules={{ required: true }}
-          render={({ field: { onChange, onBlur, value } }) => (
-            <TextInput
-              style={styles.fieldInput}
-              onBlur={onBlur}
-              onChangeText={onChange}
-              value={value}
-            />
-          )}
+          error={errors?.email?.message}
+          onSubmitEditing={() => focusNextField(passwordRef)}
+          returnKeyType="next"
         />
-        {errors.email && <Text style={styles.fieldError}>This field is required.</Text>}
       </View>
 
       <View style={styles.fieldController}>
-        <Text style={styles.fieldLabel}>Password</Text>
-        <Controller
-          name="password"
+        <InputPassword
+          ref={passwordRef}
           control={control}
-          rules={{required: true}}
-          render={({ field: { onChange, onBlur, value } }) => (
-            <TextInput
-              style={styles.fieldInput}
-              onBlur={onBlur}
-              onChangeText={onChange}
-              value={value}
-            />
-          )}
+          error={errors?.password?.message}
         />
-        {errors.password && <Text style={styles.fieldError}>This field is required.</Text>}
       </View>
 
-      <Button title="Submit" onPress={handleSubmit(onSubmit)} />
+      <Button title="Login" onPress={handleSubmit(onLoginSubmit)} />
     </View>
   );
 }

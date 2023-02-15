@@ -1,18 +1,29 @@
 import React from 'react';
-import {StyleSheet, Text, View} from "react-native";
-import {Controller} from "react-hook-form";
+import { StyleSheet, Text, View } from 'react-native';
+import { Controller } from 'react-hook-form';
 
 import Input from "./Input";
 
-export default function Field({ control, label, name, renderChild, rules, error }) {
-  const renderElement = renderChild
-    ? renderChild
+const Field = React.forwardRef((props, ref) => {
+  const {
+    control,
+    label,
+    name,
+    render,
+    rules,
+    error,
+    ...restProps
+  } = props;
+
+  const renderElement = render
+    ? render
     : ({ field: { onChange, onBlur, value } }) => (
       <Input
         style={styles.fieldInput}
         onBlur={onBlur}
         onChangeText={onChange}
         value={value}
+        {...restProps}
       />
     )
 
@@ -32,7 +43,9 @@ export default function Field({ control, label, name, renderChild, rules, error 
       )}
     </View>
   )
-}
+});
+
+export default Field;
 
 const styles = StyleSheet.create({
   fieldController: {

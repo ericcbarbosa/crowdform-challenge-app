@@ -3,13 +3,15 @@ import React from 'react';
 import Input from './Input';
 import Field from './Field';
 
-const InputPassword = React.forwardRef(({
- error,
- control,
- onChange,
- onBlur,
- ...restProps
-}, ref) => {
+const InputPassword = React.forwardRef((props, ref) => {
+  const {
+    error,
+    control,
+    onSubmitEditing,
+    returnKeyType,
+    ...restProps
+  } = props;
+
   const rules = {
     required: {
       value: true,
@@ -21,9 +23,11 @@ const InputPassword = React.forwardRef(({
     <Input
       ref={ref}
       label="Password"
+      value={value}
       onBlur={onBlur}
       onChangeText={onChange}
-      value={value}
+      onSubmitEditing={onSubmitEditing}
+      returnKeyType={returnKeyType}
       {...restProps}
     />
   )

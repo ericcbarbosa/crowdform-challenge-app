@@ -1,17 +1,34 @@
 import React from 'react';
-import {StyleSheet, TextInput} from "react-native";
+import { StyleSheet, TextInput } from 'react-native';
 
-export default function Input({value, onChange, onBlur, ...restProps}) {
+const Input = React.forwardRef((props, ref) => {
+  const {
+    value,
+    onChange,
+    onBlur,
+    onSubmitEditing,
+    returnKeyType,
+    keyboardType,
+    ...restProps
+  } = props;
+
   return (
     <TextInput
+      ref={ref}
       style={styles.input}
+      value={value}
       onBlur={onBlur}
       onChangeText={onChange}
-      value={value}
+      onSubmitEditing={onSubmitEditing}
+      returnKeyType={returnKeyType}
+      keyboardType={keyboardType}
       {...restProps}
     />
   )
-}
+});
+
+Input.displayName = 'Input';
+
 const styles = StyleSheet.create({
   input: {
     backgroundColor: '#eee',
@@ -21,3 +38,5 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
 });
+
+export default Input;

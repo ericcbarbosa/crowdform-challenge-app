@@ -3,13 +3,15 @@ import React from 'react';
 import Input from './Input';
 import Field from './Field';
 
-const InputEmail = React.forwardRef(({
- error,
- control,
- onChange,
- onBlur,
- ...restProps
-}, ref) => {
+const InputEmail = React.forwardRef((props, ref) => {
+  const {
+    error,
+    control,
+    onSubmitEditing,
+    returnKeyType,
+    ...restProps
+  } = props;
+
   const rules = {
     pattern: {
       value: new RegExp('([!#-\'*+/-9=?A-Z^-~-]+(\.[!#-\'*+/-9=?A-Z^-~-]+)*|"\(\[\]!#-[^-~ \t]|(\\[\t -~]))+")@([!#-\'*+/-9=?A-Z^-~-]+(\.[!#-\'*+/-9=?A-Z^-~-]+)*|\[[\t -Z^-~]*])'),
@@ -25,13 +27,15 @@ const InputEmail = React.forwardRef(({
     <Input
       ref={ref}
       label="E-mail"
+      value={value}
       onBlur={onBlur}
       onChangeText={onChange}
-      value={value}
+      onSubmitEditing={onSubmitEditing}
+      returnKeyType={returnKeyType}
       keyboardType="email-address"
       {...restProps}
     />
-  )
+  );
 
   return (
     <Field
