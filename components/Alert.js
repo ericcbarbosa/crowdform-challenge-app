@@ -1,4 +1,6 @@
-import {Button, Modal, Pressable, StyleSheet, Text, View} from "react-native";
+import { Modal, StyleSheet, View } from 'react-native';
+import colors from "../theme/colors";
+import Button from "./Button";
 
 export default function Alert({ visible, onClose, children }) {
   return (
@@ -36,7 +38,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     padding: 35,
     alignItems: 'center',
-    shadowColor: '#000',
+    shadowColor: colors.black,
     shadowOffset: {
       width: 0,
       height: 2,
@@ -46,21 +48,14 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   button: {
-    borderRadius: 5,
-    padding: 10,
-    elevation: 2,
     marginTop: 15,
+    display: 'flex',
+    width: '100%',
+    padding: 5,
+    height: 40,
+    minWidth: 60,
   },
   buttonClose: {
-    backgroundColor: '#2196F3',
-  },
-  textStyle: {
-    color: 'white',
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
-  modalText: {
-    marginBottom: 15,
-    textAlign: 'center',
+    backgroundColor: colors.primary,
   },
 });

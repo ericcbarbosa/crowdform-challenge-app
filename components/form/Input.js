@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, TextInput } from 'react-native';
+import colors from '../../theme/colors';
 
 const Input = React.forwardRef((props, ref) => {
   const {
@@ -31,7 +32,7 @@ Input.displayName = 'Input';
 
 const styles = StyleSheet.create({
   input: {
-    backgroundColor: '#eee',
+    backgroundColor: colors.lightMuted,
     paddingHorizontal: 12,
     paddingVertical: 9,
     borderRadius: 5,

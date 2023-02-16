@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import colors from "../../../theme/colors";
 
 export default function TermsLabel ({ labelStyle, onTermsPress, onPolicyPress }) {
   return (
@@ -29,7 +30,6 @@ export default function TermsLabel ({ labelStyle, onTermsPress, onPolicyPress })
 
 const styles = StyleSheet.create({
   termsLink: {
-    color: 'black',
-    textDecorationLine: 'underline',
+    color: colors.black,
   },
 });

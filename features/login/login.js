@@ -1,12 +1,14 @@
 import React, { useRef, useState } from 'react';
-import { Button, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { login, selectUsers } from '../../store/user/user';
 import InputEmail from '../../components/form/InputEmail';
 import InputPassword from '../../components/form/InputPassword';
-import {login, selectUsers} from '../../store/user/user';
 import Alert from '../../components/Alert';
+import Button from "../../components/Button";
+import colors from "../../theme/colors";
 
 export default function LoginScreen({ navigation }) {
   const [showErrorModal, setShowErrorModal] = useState(false);
@@ -70,7 +72,10 @@ export default function LoginScreen({ navigation }) {
         />
       </View>
 
-      <Button title="Login" onPress={handleSubmit(onLoginSubmit)} />
+      <Button
+        title="Login"
+        onPress={handleSubmit(onLoginSubmit)}
+      />
 
       <View style={styles.signupContainer}>
         <Text style={styles.signup}>
@@ -98,9 +103,10 @@ const styles = StyleSheet.create({
   },
   signup: {
     fontSize: 14,
+    color: colors.darkerMuted,
   },
   signupLink: {
-    fontSize: 14,
+    color: colors.darkerMuted,
     textDecorationLine: 'underline',
   },
 });

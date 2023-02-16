@@ -2,6 +2,7 @@ import React from 'react';
 import ExpoCheckbox from 'expo-checkbox';
 import { StyleSheet, Text, View } from 'react-native';
 import { Controller } from 'react-hook-form';
+import colors from '../../theme/colors';
 
 export default function CheckBox(props) {
   const {
@@ -14,6 +15,7 @@ export default function CheckBox(props) {
 
   const renderElement = ({ field: { onChange, value } }) => (
     <ExpoCheckbox
+      color={colors.primary}
       value={value}
       onValueChange={onChange}
       style={styles.checkbox}
@@ -53,10 +55,10 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 13,
-    color: '#666',
+    color: colors.darkerMuted,
   },
   fieldError: {
-    color: '#f00',
+    color: colors.danger,
     marginVertical: 5,
   },
 });

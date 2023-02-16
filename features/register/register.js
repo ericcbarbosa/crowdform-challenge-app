@@ -1,5 +1,5 @@
 import React, {useRef, useState} from 'react';
-import { Button, KeyboardAvoidingView, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { KeyboardAvoidingView, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 
@@ -8,10 +8,12 @@ import InputPassword from '../../components/form/InputPassword';
 import Field from '../../components/form/Field';
 import Input from '../../components/form/Input';
 import CheckBox from '../../components/form/CheckBox';
+import Button from '../../components/Button';
 import TermsLabel from './components/TermsLabel';
 
 import { register } from '../../store/user/user'
 import Alert from '../../components/Alert';
+import colors from '../../theme/colors';
 
 export default function RegisterScreen({ navigation }) {
   const [showModal, setShowModal] = useState(false);
@@ -90,11 +92,13 @@ export default function RegisterScreen({ navigation }) {
   return (
     <KeyboardAvoidingView style={styles.container} behavior="height" keyboardVerticalOffset={150}>
       <Alert visible={showModal} onClose={onModalClose}>
-        <Text>Your account is ready to use! Proceed to the login screen.</Text>
+        <Text style={{ color: colors.black, fontSize: 15 }}>
+          Your account is ready to use! Proceed to the login screen.
+        </Text>
       </Alert>
 
       <ScrollView keyboardShouldPersistTaps="handled" height="100%">
-        <Text style={{textAlign: 'center', fontWeight: 'bold', fontSize: 24, marginBottom: 21 }}>Create your account</Text>
+        <Text style={styles.title}>Create your account</Text>
 
         <View style={styles.fieldController}>
           <Field
@@ -170,7 +174,10 @@ export default function RegisterScreen({ navigation }) {
           />
         </View>
 
-        <Button title="Create account" onPress={handleSubmit(onRegisterSubmit)} />
+        <Button
+          title="Create account"
+          onPress={handleSubmit(onRegisterSubmit)}
+        />
 
         <View style={styles.signupContainer}>
           <Text style={styles.signup}>
@@ -187,6 +194,12 @@ export default function RegisterScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
+  title: {
+    textAlign: 'center',
+    fontWeight: 'bold',
+    fontSize: 24,
+    marginBottom: 34,
+  },
   fieldController: {
     marginBottom: 12
   },
@@ -207,7 +220,7 @@ const styles = StyleSheet.create({
   container: {
     display: 'flex',
     padding: 21,
-    backgroundColor: 'white',
+    backgroundColor: colors.white,
     flex: 1,
   },
 });

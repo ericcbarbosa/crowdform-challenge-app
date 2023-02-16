@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { Controller } from 'react-hook-form';
 
 import Input from './Input';
+import colors from '../../theme/colors';
 
 export default function Field(props) {
   const {
@@ -52,18 +53,18 @@ const styles = StyleSheet.create({
   fieldLabel: {
     fontWeight: 'bold',
     fontSize: 16,
-    color: '#666',
+    color: colors.darkerMuted,
     marginBottom: 7,
   },
   fieldInput: {
-    backgroundColor: '#eee',
+    backgroundColor: colors.black,
     paddingHorizontal: 12,
     paddingVertical: 9,
     borderRadius: 5,
     fontWeight: '600',
   },
   fieldError: {
-    color: '#f00',
+    color: colors.danger,
     marginVertical: 5,
   },
 });
