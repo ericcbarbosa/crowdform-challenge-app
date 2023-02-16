@@ -18,8 +18,8 @@ const InputPassword = React.forwardRef((props, ref) => {
       message: 'Password is required',
     },
     minLength: {
-      value: 6,
-      message: 'Password should have at least 6 characters',
+      value: 8,
+      message: 'Password should have at least 8 characters',
     },
   }
 
@@ -27,6 +27,7 @@ const InputPassword = React.forwardRef((props, ref) => {
     <Input
       ref={ref}
       label="Password"
+      type="password"
       value={value}
       onBlur={onBlur}
       onChangeText={onChange}
