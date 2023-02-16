@@ -1,6 +1,7 @@
-import React, { useRef } from 'react';
+import React, {useRef, useState} from 'react';
 import { Button, KeyboardAvoidingView, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
 
 import InputEmail from '../../components/form/InputEmail';
 import InputPassword from '../../components/form/InputPassword';
@@ -9,10 +10,15 @@ import Input from '../../components/form/Input';
 import CheckBox from '../../components/form/CheckBox';
 import TermsLabel from './components/TermsLabel';
 
+import { register } from '../../store/user/user'
+import Alert from "../../components/Alert";
+
 export default function RegisterScreen({ navigation }) {
+  const [showModal, setShowModal] = useState(false);
   const lastNameRef = useRef(null);
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
+  const dispatch = useDispatch();
 
   const { control, handleSubmit, formState: { errors } } = useForm({
     defaultValues: {
@@ -20,7 +26,7 @@ export default function RegisterScreen({ navigation }) {
       lastName: '',
       email: '',
       password: '',
-      terms: false,
+      acceptTermsAndPolicy: false,
     }
   });
 
@@ -45,7 +51,7 @@ export default function RegisterScreen({ navigation }) {
         message: 'Last name should have at least 3 characters',
       },
     },
-    terms: {
+    acceptTermsAndPolicy: {
       required: {
         value: true,
         message: 'Agree to the Terms of Service and Privacy policy to proceed',
@@ -60,7 +66,8 @@ export default function RegisterScreen({ navigation }) {
   };
 
   const onRegisterSubmit = (data) => {
-    console.log('data: ', data)
+    dispatch(register(data));
+    setShowModal(true);
   }
 
   const onLoginPress = () => {
@@ -75,8 +82,17 @@ export default function RegisterScreen({ navigation }) {
     navigation.navigate('Login')
   }
 
+  const onModalClose = () => {
+    setShowModal(false);
+    navigation.navigate('Login');
+  }
+
   return (
-    <KeyboardAvoidingView style={styles.avoidingView} behavior="height" keyboardVerticalOffset={150}>
+    <KeyboardAvoidingView style={styles.container} behavior="height" keyboardVerticalOffset={150}>
+      <Alert visible={showModal} onClose={onModalClose}>
+        <Text>Your account is ready to use! Proceed to the login screen.</Text>
+      </Alert>
+
       <ScrollView keyboardShouldPersistTaps="handled" height="100%">
         <Text style={{textAlign: 'center', fontWeight: 'bold', fontSize: 24, marginBottom: 21 }}>Create your account</Text>
 
@@ -134,17 +150,16 @@ export default function RegisterScreen({ navigation }) {
             ref={passwordRef}
             control={control}
             error={errors?.password?.message}
-            onSubmitEditing={() => focusNextField(termsRef)}
             returnKeyType="next"
           />
         </View>
 
         <View style={styles.fieldController}>
           <CheckBox
-            name="terms"
+            name="acceptTermsAndPolicy"
             control={control}
-            rules={rules.terms}
-            error={errors?.terms?.message}
+            rules={rules.acceptTermsAndPolicy}
+            error={errors?.acceptTermsAndPolicy?.message}
             Label={({styles}) => (
               <TermsLabel
                 labelStyle={styles}
@@ -155,7 +170,7 @@ export default function RegisterScreen({ navigation }) {
           />
         </View>
 
-        <Button title="Login" onPress={handleSubmit(onRegisterSubmit)} />
+        <Button title="Create account" onPress={handleSubmit(onRegisterSubmit)} />
 
         <View style={styles.signupContainer}>
           <Text style={styles.signup}>
@@ -189,7 +204,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     textDecorationLine: 'underline',
   },
-  avoidingView: {
+  container: {
     display: 'flex',
     padding: 21,
     backgroundColor: 'white',

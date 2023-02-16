@@ -27,7 +27,7 @@ const userSlice = createSlice({
         acceptTermsAndPolicy,
       } = payload;
 
-      state.users.push({
+      const newUser = {
         id: state.users.length + 1,
         firstName,
         lastName,
@@ -35,7 +35,9 @@ const userSlice = createSlice({
         password,
         acceptTermsAndPolicy,
         ...user,
-      });
+      };
+
+      state.users.push(newUser);
     }
   }
 })
