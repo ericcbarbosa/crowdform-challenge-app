@@ -2,9 +2,9 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Controller } from 'react-hook-form';
 
-import Input from "./Input";
+import Input from './Input';
 
-const Field = React.forwardRef((props, ref) => {
+export default function Field(props) {
   const {
     control,
     label,
@@ -43,9 +43,7 @@ const Field = React.forwardRef((props, ref) => {
       )}
     </View>
   )
-});
-
-export default Field;
+}
 
 const styles = StyleSheet.create({
   fieldController: {

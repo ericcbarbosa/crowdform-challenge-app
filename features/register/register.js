@@ -6,6 +6,8 @@ import InputEmail from '../../components/form/InputEmail';
 import InputPassword from '../../components/form/InputPassword';
 import Field from '../../components/form/Field';
 import Input from '../../components/form/Input';
+import CheckBox from '../../components/form/CheckBox';
+import TermsLabel from './components/TermsLabel';
 
 export default function RegisterScreen({ navigation }) {
   const lastNameRef = useRef(null);
@@ -18,20 +20,35 @@ export default function RegisterScreen({ navigation }) {
       lastName: '',
       email: '',
       password: '',
+      terms: false,
     }
   });
 
   const rules = {
     firstName: {
+      required: {
+        value: true,
+        message: 'First name is required',
+      },
       minLength: {
         value: 3,
         message: 'First name should have at least 3 characters',
       },
     },
     lastName: {
+      required: {
+        value: true,
+        message: 'Last name is required',
+      },
       minLength: {
         value: 3,
         message: 'Last name should have at least 3 characters',
+      },
+    },
+    terms: {
+      required: {
+        value: true,
+        message: 'Agree to the Terms of Service and Privacy policy to proceed',
       },
     },
   }
@@ -47,6 +64,14 @@ export default function RegisterScreen({ navigation }) {
   }
 
   const onLoginPress = () => {
+    navigation.navigate('Login')
+  }
+
+  const onTermsPress = () => {
+    navigation.navigate('Login')
+  }
+
+  const onPolicyPress = () => {
     navigation.navigate('Login')
   }
 
@@ -109,6 +134,24 @@ export default function RegisterScreen({ navigation }) {
             ref={passwordRef}
             control={control}
             error={errors?.password?.message}
+            onSubmitEditing={() => focusNextField(termsRef)}
+            returnKeyType="next"
+          />
+        </View>
+
+        <View style={styles.fieldController}>
+          <CheckBox
+            name="terms"
+            control={control}
+            rules={rules.terms}
+            error={errors?.terms?.message}
+            Label={({styles}) => (
+              <TermsLabel
+                labelStyle={styles}
+                onTermsPress={onTermsPress}
+                onPolicyPress={onPolicyPress}
+              />
+            )}
           />
         </View>
 
@@ -136,7 +179,6 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     marginTop: 15,
-    textAlign: 'center',
     alignItems: 'center',
     justifyContent: 'center',
   },
