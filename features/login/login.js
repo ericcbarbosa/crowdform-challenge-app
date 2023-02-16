@@ -47,7 +47,7 @@ export default function LoginScreen({ navigation }) {
   }
 
   return (
-    <View style={{ padding: 21, backgroundColor: 'white', flex: 1 }}>
+    <View style={styles.container}>
       <Alert visible={showErrorModal} onClose={onRegisterPress}>
         <Text>We couldn't find your account. Please, create an account.</Text>
       </Alert>
@@ -91,6 +91,11 @@ export default function LoginScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 21,
+    backgroundColor: 'white',
+  },
   fieldController: {
     marginBottom: 12
   },

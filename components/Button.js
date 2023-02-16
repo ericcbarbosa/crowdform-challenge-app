@@ -6,24 +6,25 @@ export default function Button({
   backgroundColor = colors.primary,
   color = colors.white,
   style = {},
+  labelStyle = {},
   title,
   onPress,
   ...restProps
 }) {
   const buttonStyles = {
     backgroundColor: backgroundColor,
-    color: color,
   }
 
   return (
     <Pressable
       title={title}
       onPress={onPress}
-      color={color}
       style={{...styles.button, ...buttonStyles, ...style}}
       {...restProps}
     >
-      <Text style={styles.title}>{title}</Text>
+      <Text style={{...styles.title, ...labelStyle, color}}>
+        {title}
+      </Text>
     </Pressable>
   )
 }
