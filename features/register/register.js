@@ -11,7 +11,7 @@ import CheckBox from '../../components/form/CheckBox';
 import TermsLabel from './components/TermsLabel';
 
 import { register } from '../../store/user/user'
-import Alert from "../../components/Alert";
+import Alert from '../../components/Alert';
 
 export default function RegisterScreen({ navigation }) {
   const [showModal, setShowModal] = useState(false);

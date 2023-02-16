@@ -1,11 +1,18 @@
-import { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { Button, StyleSheet, Text, View } from 'react-native';
 import { useForm } from 'react-hook-form';
+import { useDispatch, useSelector } from 'react-redux';
 
 import InputEmail from '../../components/form/InputEmail';
 import InputPassword from '../../components/form/InputPassword';
+import {login, selectUsers} from '../../store/user/user';
+import Alert from '../../components/Alert';
 
 export default function LoginScreen({ navigation }) {
+  const [showErrorModal, setShowErrorModal] = useState(false);
+  const users = useSelector(selectUsers);
+  const dispatch = useDispatch();
+
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
 
@@ -27,11 +34,22 @@ export default function LoginScreen({ navigation }) {
   };
 
   const onLoginSubmit = (data) => {
-    console.log('data: ', data)
+    const user = users.find(({ email }) => data?.email === email)
+
+    if (user) {
+      dispatch(login())
+      return dispatch(login(user));
+    }
+
+    setShowErrorModal(true);
   }
 
   return (
     <View style={{ padding: 21, backgroundColor: 'white', flex: 1 }}>
+      <Alert visible={showErrorModal} onClose={onRegisterPress}>
+        <Text>We couldn't find your account. Please, create an account.</Text>
+      </Alert>
+
       <Text style={{textAlign: 'center', fontWeight: 'bold', fontSize: 24, marginBottom: 21 }}>Login</Text>
 
       <View style={styles.fieldController}>
@@ -75,7 +93,6 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     marginTop: 15,
-    textAlign: 'center',
     alignItems: 'center',
     justifyContent: 'center',
   },

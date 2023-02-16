@@ -12,6 +12,7 @@ const userSlice = createSlice({
     login(state, action) {
       const { payload } = action;
       state.user = payload;
+      state.isLoggedIn = true;
     },
     logout(state) {
       state.user = null;
@@ -43,7 +44,7 @@ const userSlice = createSlice({
 })
 
 export const selectUser = (state) => state.user;
-export const selectUsers = (state) => state.users;
+export const selectUsers = (state) => state.user.users;
 
 
 export const { login, logout, register } = userSlice.actions
