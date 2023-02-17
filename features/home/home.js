@@ -1,29 +1,27 @@
-import {StyleSheet, Text, View} from "react-native";
-import HomeHeader from "./components/HomeHeader";
-import colors from "../../theme/colors";
-import HomeFunds from "./components/HomeFunds";
-import user from "../../data/user";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import HomeListScreen from "./pages/home-list/HomeList";
+import FundDetailScreen from "./pages/fund-detail/FundDetail";
+
+const Stack = createNativeStackNavigator();
 
 export default function HomeScreen() {
-  const { funds, portfolioPercentStatus, portfolioValue } = user;
-
-  const onFundPress = (fundId) => {
-    console.log('fundId: ', fundId)
-    // navigator.navigate('Fund', { id: fundId });
-  }
-
   return (
-    <View style={styles.container}>
-      <HomeHeader value={portfolioValue} percentStatus={portfolioPercentStatus} />
-      <HomeFunds funds={funds} onPress={onFundPress} />
-    </View>
+    <Stack.Navigator>
+      <Stack.Screen
+        name="HomeList"
+        component={HomeListScreen}
+        options={{
+          title: 'HomeList',
+        }}
+      />
+
+      <Stack.Screen
+        name="FundDetail"
+        component={FundDetailScreen}
+        options={{
+          title: 'Fund Detail',
+        }}
+      />
+    </Stack.Navigator>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 21,
-    backgroundColor: colors.white,
-  },
-});

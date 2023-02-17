@@ -1,7 +1,8 @@
-import {Image, Pressable, StyleSheet, Text, View} from "react-native";
-import colors from "../theme/colors";
-import {Ionicons} from "@expo/vector-icons";
 import React from "react";
+import {Image, Pressable, StyleSheet, Text, View} from "react-native";
+import {Ionicons} from "@expo/vector-icons";
+
+import colors from "../theme/colors";
 
 export default function Card({ id, color, name, value, percentStatus, icon, onPress }) {
   const isGrowing = percentStatus >= 0;
@@ -22,9 +23,11 @@ export default function Card({ id, color, name, value, percentStatus, icon, onPr
 
       <Image
         style={styles.image}
-        source={{
-          uri: '../assets/graph-up.svg',
-        }}
+        source={
+          isGrowing
+            ? require(`../assets/graph-up.png`)
+            : require(`../assets/graph-down.png`)
+      }
       />
 
       <View style={styles.valuesContainer}>
@@ -39,7 +42,6 @@ export default function Card({ id, color, name, value, percentStatus, icon, onPr
           {percentStatus}%
         </Text>
       </View>
-
     </Pressable>
   )
 }

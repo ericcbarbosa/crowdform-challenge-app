@@ -37,6 +37,7 @@ function AppContainer() {
             component={HomeScreen}
             options={{
               ...getScreenOptions(),
+              headerShown: false,
               tabBarIcon: ({ focused, color }) => (
                 <Ionicons
                   name={focused ? 'home' : 'home-outline'}
@@ -46,6 +47,7 @@ function AppContainer() {
               )
             }}
           />
+
           <Tab.Screen
             name="Trade"
             component={TradeScreen}
@@ -66,6 +68,7 @@ function AppContainer() {
               )
             }}
           />
+
           <Tab.Screen
             name="Portfolio"
             component={PortfolioScreen}

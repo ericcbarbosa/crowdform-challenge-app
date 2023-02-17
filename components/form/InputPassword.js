@@ -27,7 +27,7 @@ const InputPassword = React.forwardRef((props, ref) => {
     <Input
       ref={ref}
       label="Password"
-      type="password"
+      secureTextEntry={true}
       value={value}
       onBlur={onBlur}
       onChangeText={onChange}
